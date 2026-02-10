@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: chatbot_web
+    env_file: .env
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8000"   # host:container (avoid conflict with other app on 8000)
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: chatbot_db
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"   # host:container (avoid conflict with other Postgres on 5432)
+
+volumes:
+  postgres_data:
