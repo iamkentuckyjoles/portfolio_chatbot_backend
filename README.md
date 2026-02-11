@@ -52,13 +52,7 @@ POSTGRES_PORT=5432
 
 # Gemini / AI
 GEMINI_API_KEY=your_api_key_here
-MODEL_NAME=gemini-2.5-flash
 
-# Optional rate limit settings (examples)
-RATE_LIMIT_PER_MINUTE=20
-RATE_LIMIT_PER_DAY=500
-REPEAT_QUESTION_WINDOW_SECONDS=300
-```
 
 Adjust values as needed for production (set `DJANGO_DEBUG=False`, secure secret and DB credentials, and configure allowed hosts).
 
@@ -157,7 +151,7 @@ Support,How do I reset my password?,You can reset your password by...
 ---
 
 ## 🔒 Rate Limits & Safety
-- Per-minute and per-day rate limits are enforced using Django cache (redis or in-memory backend).
+- Per-minute and per-day rate limits are enforced using Django cache 
 - Repeat-question protections to prevent spam or accidental loops.
 - Configure limits via environment variables in `.env`.
 
@@ -195,3 +189,6 @@ Include your preferred license here (e.g., MIT). If none, add a LICENSE file.
 ## Contact
 Created by Kenth — [GitHub: iamkentuckyjoles](https://github.com/iamkentuckyjoles)
 If you'd like help deploying, extending AI prompts, or adding more languages, open an issue or reach out via the repo.
+
+## Pls leave a like if this was helpful for you, thanks!
+
