@@ -185,15 +185,8 @@ python manage.py runserver 8000
 
 ---
 
-## License
-Include your preferred license here (e.g., MIT). If none, add a LICENSE file.
-
----
-
-## Contact
-Created by Kenth — [GitHub: iamkentuckyjoles](https://github.com/iamkentuckyjoles)
-If you'd like help deploying, extending AI prompts, or adding more languages, open an issue or reach out via the repo.
 
 ## Pls leave a like if this was helpful for you, thanks!
+
 
 
