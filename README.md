@@ -58,12 +58,16 @@ Adjust values as needed for production (set `DJANGO_DEBUG=False`, secure secret 
 
 ---
 
+```
 ## 🚀 Quickstart (Docker)
 
 1. Clone the repo
-```bash
+
+```
+bash
 git clone https://github.com/iamkentuckyjoles/portfolio_chatbot_backend.git
 cd portfolio_chatbot_backend
+
 ```
 
 2. Create `.env` using the example above.
@@ -191,4 +195,5 @@ Created by Kenth — [GitHub: iamkentuckyjoles](https://github.com/iamkentuckyjo
 If you'd like help deploying, extending AI prompts, or adding more languages, open an issue or reach out via the repo.
 
 ## Pls leave a like if this was helpful for you, thanks!
+
 
