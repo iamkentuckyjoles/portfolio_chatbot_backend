@@ -1,0 +1,2 @@
+# Run fetch_quotes every 2 hours
+0 */2 * * * root cd /app && python manage.py fetch_quotes >> /var/log/cron.log 2>&1
