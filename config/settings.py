@@ -17,6 +17,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
+OPENWEATHERMAP_API_KEY = env("OPENWEATHERMAP_API_KEY")
 
 # Database (Postgres via .env)
 DATABASES = {
@@ -45,11 +46,13 @@ INSTALLED_APPS = [
     "chatbot",
     "quotes",
     "import_export",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -86,7 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Manila"
 USE_I18N = True
 USE_TZ = True
 
@@ -102,3 +105,5 @@ CACHES = {
         "LOCATION": "chatbot-cache",
     }
 }
+
+CORS_ALLOW_ALL_ORIGINS = True

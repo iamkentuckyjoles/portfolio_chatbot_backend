@@ -8,6 +8,7 @@ from .models import KnowledgeItem
 from .serializers import KnowledgeItemSerializer
 from django.contrib.postgres.search import TrigramSimilarity
 import langdetect  
+from .services.weather import get_weather, format_weather
 
 
 
@@ -100,3 +101,11 @@ def get_client_ip(request):
     if x_forwarded_for:
         return x_forwarded_for.split(",")[0]
     return request.META.get("REMOTE_ADDR")
+
+
+@api_view(["GET"])
+def villaba_weather(request):
+    raw_data = get_weather()
+    formatted = format_weather(raw_data)
+    return Response(formatted)
+

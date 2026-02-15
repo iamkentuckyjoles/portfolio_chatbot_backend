@@ -5,3 +5,4 @@ psycopg2-binary>=2.9.11
 requests>=2.32.5
 django-import-export
 langdetect>=1.0.9
+django-cors-headers

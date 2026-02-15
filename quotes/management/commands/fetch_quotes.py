@@ -1,16 +1,20 @@
 import requests, json, re
 from django.core.management.base import BaseCommand
 from django.conf import settings
+from django.utils import timezone
+from datetime import timedelta
 from quotes.models import Quote
 
 MODEL_NAME = "gemini-2.5-flash"
 
 class Command(BaseCommand):
-    help = "Fetch 5 quotes from Gemini and save to DB"
+    help = "Fetch 5 quotes from Gemini and save to DB (keep rolling 7-day window)"
 
     def handle(self, *args, **kwargs):
-        # Delete expired quotes (>7 days old)
-        Quote.objects.all().delete()
+        # Delete only expired quotes (>7 days old)
+        Quote.objects.filter(
+            created_at__lt=timezone.now() - timedelta(days=7)
+        ).delete()
 
         batch_size = 5
         total_quotes = 0
@@ -40,8 +44,14 @@ class Command(BaseCommand):
             self.stderr.write("Gemini returned an empty response")
             return
 
-        # 🔧 Strip Markdown fences like ```json ... ```
-        cleaned = re.sub(r"^```json|```$", "", text_response.strip(), flags=re.MULTILINE).strip()
+        # 🔧 Sanitize Gemini output
+        cleaned = text_response.strip()
+        # Remove Markdown fences
+        cleaned = re.sub(r"^```json|```$", "", cleaned, flags=re.MULTILINE).strip()
+        # Remove stray "-" lines
+        cleaned = re.sub(r"^\s*-\s*$", "", cleaned, flags=re.MULTILINE)
+        # Remove trailing commas before closing braces/brackets
+        cleaned = re.sub(r",\s*([\]}])", r"\1", cleaned)
 
         try:
             quotes = json.loads(cleaned)
@@ -53,7 +63,7 @@ class Command(BaseCommand):
                 total_quotes += 1
         except json.JSONDecodeError as e:
             self.stderr.write(f"Failed to parse JSON: {e}")
-            self.stderr.write(f"Raw response:\n{text_response}")
+            self.stderr.write(f"Sanitized response:\n{cleaned}")
             return
 
         self.stdout.write(self.style.SUCCESS(f"Saved {total_quotes} quotes"))
