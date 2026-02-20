@@ -59,6 +59,7 @@ def format_weather(data):
             "temp": None,
             "description": None,
             "message": data["error"],
+            "icon_url": None,
             "date": current_date,
             "time": current_time,
         }
@@ -66,6 +67,8 @@ def format_weather(data):
     condition = data["weather"][0]["main"]
     description = data["weather"][0]["description"]
     temp = data["main"]["temp"]
+    icon_code = data["weather"][0]["icon"]
+    icon_url = f"https://openweathermap.org/img/wn/{icon_code}@2x.png"
 
     # Default message
     message = "Coding regardless of the weather."
@@ -86,6 +89,7 @@ def format_weather(data):
         "temp": temp,
         "description": description,
         "message": message,
+        "icon_url": icon_url,
         "date": current_date,
         "time": current_time,
     }

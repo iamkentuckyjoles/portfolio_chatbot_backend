@@ -1,2 +1,2 @@
-# Run fetch_quotes every minute (testing only)
-* * * * * root cd /app && python manage.py fetch_quotes >> /var/log/cron.log 2>&1
+*/3 12 * * * cd /app && python manage.py fetch_quotes >> /var/log/cron.log 2>&1
+

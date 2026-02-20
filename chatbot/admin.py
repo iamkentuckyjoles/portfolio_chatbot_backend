@@ -14,7 +14,7 @@ class CustomImportForm(ImportForm):
         label="Custom file name",
         
     )
-
+    
 @admin.register(KnowledgeItem)
 class KnowledgeItemAdmin(ImportExportModelAdmin):
     resource_class = KnowledgeItemResource
@@ -32,6 +32,9 @@ class KnowledgeItemAdmin(ImportExportModelAdmin):
     search_fields = ("question", "answer", "category", "custom_file_name")
     list_filter = ("category", "uploaded_time")
 
+    # ✅ Add pagination here
+    list_per_page = 100
+
     def row_actions(self, obj):
         edit_url = reverse("admin:chatbot_knowledgeitem_change", args=[obj.id])
         delete_url = reverse("admin:chatbot_knowledgeitem_delete", args=[obj.id])
@@ -44,8 +47,6 @@ class KnowledgeItemAdmin(ImportExportModelAdmin):
     row_actions.short_description = "Actions"
 
     def import_data(self, dataset, **kwargs):
-        
         if "file_name" not in kwargs:
             kwargs["file_name"] = kwargs.get("custom_file_name") or dataset.title
         return super().import_data(dataset, **kwargs)
-

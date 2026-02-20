@@ -7,6 +7,7 @@ import environ
 import os
 
 # Build paths inside the project
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Initialise environment variables
@@ -18,6 +19,23 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 OPENWEATHERMAP_API_KEY = env("OPENWEATHERMAP_API_KEY")
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+RECAPTCHA_SECRET_KEY = env("RECAPTCHA_SECRET_KEY")
+
+
+GEMINI_API_KEY_1 = env("GEMINI_API_KEY_1")
+GEMINI_API_KEY_2 = env("GEMINI_API_KEY_2")
+GEMINI_API_KEY_3 = env("GEMINI_API_KEY_3")
+GEMINI_API_KEY_4 = env("GEMINI_API_KEY_4")
+GEMINI_API_KEY_5 = env("GEMINI_API_KEY_5")
+GEMINI_API_KEY_6 = env("GEMINI_API_KEY_6")
 
 # Database (Postgres via .env)
 DATABASES = {

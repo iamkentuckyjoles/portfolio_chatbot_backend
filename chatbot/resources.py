@@ -26,8 +26,8 @@ class KnowledgeItemResource(resources.ModelResource):
             raise ValidationError("Invalid file type. Only .csv, .json, or .txt files are allowed.")
 
         # Enforce row limit
-        if len(dataset) > 50:
-            raise ValidationError("Bulk upload limit exceeded. Maximum 50 rows allowed per file.")
+        if len(dataset) > 500:
+            raise ValidationError("Bulk upload limit exceeded. Maximum 500 rows allowed per file.")
 
     def before_import_row(self, row, row_number=None, **kwargs):
         # Inject filename into each row before saving

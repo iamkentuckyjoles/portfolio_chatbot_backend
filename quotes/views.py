@@ -16,3 +16,4 @@ def latest_quotes(request):
     quotes = qs[:60]
     serializer = QuoteSerializer(quotes, many=True)
     return Response(serializer.data)
+
