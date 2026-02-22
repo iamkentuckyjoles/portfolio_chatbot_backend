@@ -7,7 +7,7 @@ from quotes.models import Quote
 
 MODEL_NAME = "gemini-2.5-flash"
 
-BATCH_SIZE = 5   # 5 quotes per run
+BATCH_SIZE = 10 # 10 quotes per run
 KEEP_DAYS = 7     # delete quotes older than 7 days
 
 class Command(BaseCommand):

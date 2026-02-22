@@ -9,11 +9,11 @@ def latest_quotes(request):
     qs = Quote.objects.order_by('-created_at')
     
     # Only return results once at least 60 exist
-    if qs.count() < 60:
+    if qs.count() < 50:
         return Response([])  # empty list until threshold reached
     
     # Limit to the latest 60 quotes
-    quotes = qs[:60]
+    quotes = qs[:50]
     serializer = QuoteSerializer(quotes, many=True)
     return Response(serializer.data)
 
